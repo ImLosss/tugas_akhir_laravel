@@ -13,7 +13,7 @@ class LoginController extends Controller
             'email' => 'required',
             'password' => 'required',
         ]);
-        if(Auth::attempt($credentials, $request->filled('remember_token'))) {
+        if(Auth::attempt($credentials)) {
             $user = Auth::user();
             
             // cek apakah akun user aktif/nonaktif
@@ -30,9 +30,7 @@ class LoginController extends Controller
             $request->session()->regenerate();
             $message = 'Welcome ' . $user->name;
 
-            if($user->hasRole('admin')) return redirect()->route('home')->with('alert', 'success')->with('message', $message);
-            if($user->hasRole('dapur')) return redirect()->route('order.index')->with('alert', 'success')->with('message', $message);
-            if($user->hasRole(['kasir', 'partner', 'pelayan'])) return redirect()->route('cashier')->with('alert', 'success')->with('message', $message);
+            return redirect()->route('home')->with('alert', 'success')->with('message', $message);
         } else {
             return back()->withInput()->withErrors([
                 'email' => 'Email/password salah!',

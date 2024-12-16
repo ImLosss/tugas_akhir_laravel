@@ -35,7 +35,7 @@
                             <div class="card-header pb-0 text-left bg-transparent">
                                 <div class="row mb-3">
                                     <div class="col d-flex align-items-center">
-                                        <h3 class="font-weight-bolder gradient-text">Inventaris</h3>
+                                        <h3 class="font-weight-bolder gradient-text">Login</h3>
                                     </div>
                                 </div>
                                 <p class="mb-0" style="font-size: 15px">Enter your email and password to sign in</p>
@@ -72,7 +72,7 @@
                         <p class="text-secondary text-center">
                             Copyright © <script>
                                 document.write(new Date().getFullYear())
-                            </script> Pahriansyah | Akram
+                            </script> Pahriansyah
                         </p>
                     </div>
                     <div class="col-md-6">

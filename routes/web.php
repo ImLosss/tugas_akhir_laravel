@@ -1,21 +1,11 @@
 <?php
 
 use App\Http\Controllers\admin\AdminController;
-use App\Http\Controllers\admin\CartController;
-use App\Http\Controllers\admin\CashierController;
 use App\Http\Controllers\admin\CategoryController;
-use App\Http\Controllers\admin\DiscountController;
-use App\Http\Controllers\admin\OrderController;
-use App\Http\Controllers\admin\PartnerProductController;
-use App\Http\Controllers\admin\PaymentController;
-use App\Http\Controllers\admin\ProductController;
-use App\Http\Controllers\admin\ReportController;
-use App\Http\Controllers\admin\RoleController;
-use App\Http\Controllers\admin\TableController;
+use App\Http\Controllers\admin\InventarisController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\LogoutController;
-use App\Services\OrderService;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,4 +33,27 @@ Route::group([
 ], function () {
     // routeDahboard
     Route::get('/', [AdminController::class, 'index'])->name('home');
+    
+    // routeUser
+    Route::resource('user', UserController::class)->only(['index', 'update', 'edit', 'store', 'destroy', 'create'])->names([
+        'index' => 'user',
+        'update'  => 'user.update',
+        'edit' => 'user.edit',
+        'store' => 'user.store',
+        'destroy' => 'user.destroy',
+        'create' => 'user.create'
+    ]);
+    // endRoute
+
+    // routeInventaris
+    Route::resource('inventaris', InventarisController::class)->only(['index', 'update', 'edit', 'store', 'destroy', 'create'])->names([
+        'index' => 'inventaris'
+    ]);
+    // endRoute
+
+    // routeCategory
+    Route::resource('category', CategoryController::class)->only(['index', 'update', 'edit', 'store', 'destroy', 'create'])->names([
+        'index' => 'category',
+    ]);
+    // endRoute
 });
