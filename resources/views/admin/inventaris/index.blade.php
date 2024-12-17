@@ -24,7 +24,7 @@
                         <h6>List Barang</h6>
                     </div>
                     <div class="col-6 text-end">
-                        <a class="btn bg-gradient-dark mb-0" href="{{ route('user.create') }}"><i class="fas fa-plus"></i>&nbsp;&nbsp;Tambah Barang</a>
+                        <a class="btn bg-gradient-dark mb-0" href="{{ route('inventaris.create') }}"><i class="fas fa-plus"></i>&nbsp;&nbsp;Tambah Barang</a>
                     </div>
                 </div>
             </div>
@@ -33,16 +33,38 @@
                     <table class="table" id="dataTable3">
                         <thead>
                         <tr>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">User</th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Phone</th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Role</th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Barang</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kategori</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Jumlah</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">baik</th> 
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">rusak</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">dipinjam</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                            
+                            @foreach ($data as $no => $item)
+                                <tr>
+                                    <td>{{ $no+=1 }}</td>
+                                    <td>{{ $item->nama_barang }}</td>
+                                    <td>{{ $item->category->name }}</td>
+                                    <td>{{ $item->jumlah }}</td>
+                                    <td>{{ $item->baik }}</td>
+                                    <td>{{ $item->rusak }}</td>
+                                    <td>{{ $item->dipinjam }}</td>
+                                    <td>
+                                        <a href="{{ route('inventaris.edit', $item->id) }}" data-bs-toggle="tooltip" data-bs-original-title="Edit Barang">
+                                            <i class="fa-solid fa-pen-to-square text-secondary"></i>
+                                        </a>
+                                        <button class="cursor-pointer fas fa-trash text-danger" onclick="modalHapus('{{ $item->id  }}')" style="border: none; background: no-repeat;" data-bs-toggle="tooltip" data-bs-original-title="Hapus Barang"></button>
+                                        <form id="form_{{ $item->id }}" action="{{ route('inventaris.destroy', $item->id) }}" method="POST" class="inline">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

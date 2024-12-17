@@ -11,8 +11,8 @@
     </nav>
 @endsection
 @section('content')
-  <div class="row mb-3">
-    <h5>Hallo</h5>
+  <div class="row mb-3 p-3">
+    <h5>Hallo {{ Auth::user()->name }}</h5>
   </div>
 @endsection
 
